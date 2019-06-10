@@ -13,7 +13,7 @@ class AddPost extends Component {
     event.preventDefault();
 
     const { title, content } = this.state;
-
+   
     const post = {
       title,
       content,
