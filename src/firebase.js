@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/auth'; // it is needed for authentication
 
 const config = {
   apiKey: "AIzaSyAy5PIs2SJPTScRZmqSb0of2dqTX0SmpJw",
@@ -21,5 +22,11 @@ window.firebase = firebase;
 // It hides errors in the console but it not required anymore.
 // const settings = { timestampsInSnapshots: true };
 // firebase.settings(settings);
+
+export const auth = firebase.auth();
+
+export const provider = new firebase.auth.GoogleAuthProvider();
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const signOut = () => auth.signOut();
 
 export default firebase;
