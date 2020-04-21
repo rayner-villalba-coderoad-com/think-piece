@@ -6,36 +6,7 @@ import { collectIdsAndDocs } from '../utilities';
 
 class Application extends Component {
   state = {
-    posts: [
-      // {
-      //   id: '1',
-      //   title: 'A Very Hot Take',
-      //   content:
-      //     'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis suscipit repellendus modi unde cumque, fugit in ad necessitatibus eos sed quasi et! Commodi repudiandae tempora ipsum fugiat. Quam, officia excepturi!',
-      //   user: {
-      //     uid: '123',
-      //     displayName: 'Bill Murray',
-      //     email: 'billmurray@mailinator.com',
-      //     photoURL: 'https://www.fillmurray.com/300/300',
-      //   },
-      //   stars: 1,
-      //   comments: 47,
-      // },
-      // {
-      //   id: '2',
-      //   title: 'The Sauciest of Opinions',
-      //   content:
-      //     'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis suscipit repellendus modi unde cumque, fugit in ad necessitatibus eos sed quasi et! Commodi repudiandae tempora ipsum fugiat. Quam, officia excepturi!',
-      //   user: {
-      //     uid: '456',
-      //     displayName: 'Mill Burray',
-      //     email: 'notbillmurray@mailinator.com',
-      //     photoURL: 'https://www.fillmurray.com/400/400',
-      //   },
-      //   stars: 3,
-      //   comments: 0,
-      // },
-    ],
+    posts: [],
   };
 
   unsubscribe = null;
@@ -78,34 +49,13 @@ class Application extends Component {
     this.unsubscribe();
   }
 
-  handleCreate = async post => {
-    const { posts } = this.state;
-    // add method return document reference
-    const docRef = await firestore.collection('posts').add(post);
-    const doc = await docRef.get();
-
-    const newPost = collectIdsAndDocs(doc);
-    this.setState({ posts: [newPost, ...posts] });
-  };
-
-  handleRemove = async id => {
-    const allPosts = this.state.posts;
-     
-    //Delete from firebase the document
-    await firestore.doc(`posts/${id}`).delete();
-
-    const posts = allPosts.filter(post => post.id !== id);
-
-    this.setState({ posts });
-  }
-
   render() {
     const { posts } = this.state;
 
     return (
       <main className="Application">
         <h1>Rayner Posts</h1>
-        <Posts posts={posts} onCreate={this.handleCreate} onRemove={this.handleRemove} />
+        <Posts posts={posts} />
       </main>
     );
   }
