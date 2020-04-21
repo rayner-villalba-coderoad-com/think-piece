@@ -15,13 +15,12 @@ class AddPost extends Component {
     const { title, content } = this.state;
 
     const post = {
-      id: Date.now().toString(),
       title,
       content,
       user: {
-        uid: '1111',
-        displayName: 'Steve Kinney',
-        email: 'steve@mailinator.com',
+        uid: '1234',
+        displayName: 'Rayner Villalbe',
+        email: 'rayner.villalba@gmail.com',
         photoURL: 'http://placekitten.com/g/200/200',
       },
       favorites: 0,
